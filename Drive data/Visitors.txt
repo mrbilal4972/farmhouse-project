@@ -1,0 +1,8 @@
+API KEY
+
+AIzaSyD-KLfyvCO61FCdSLC7C5odyA3VSRM7BqU
+
+OAuth client
+
+client ID: 1006402146071-d9fnkn21r8a0tds4i4t0aqbfnjjms458.apps.googleusercontent.com
+client Secret: 8WLE0WTRNT5LxYPnG4vtb9hd
