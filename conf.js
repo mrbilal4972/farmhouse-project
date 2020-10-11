@@ -1,8 +1,8 @@
 window.appConf = {
     author: 'React Drive CMS',
-    dashboardId: '1-on_GfmvaEcOk7HcWfKb8B6KFRv166RkLN2YmDEtDn4',
+    dashboardId: '1ZTWuKEv1lUL2q2_1MijoVrbNV-WGCbY_F4SCMp6e2OE',
     sendContactMessageUrlId:
-        'AKfycbxitKMJEXHUn0XbJ8hUY3tAZO1XwsPMYQQODvmvJaUWrcAG9aQ',
+        '1_vpu6I-C1SAECU7eRTBNdCmhxtHFyYd7LBy3cZzjNL7UYCctQvTdWhkz',
     shortname: 'easydrivecms',
     root: 'react-drive-cms',
 }

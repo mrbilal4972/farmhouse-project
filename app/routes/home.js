@@ -1,3 +1,5 @@
+// import { html, PureComponent } from 'react'
+
 import { html, PureComponent } from '../../deps/react.js'
 import { StyleSheet, css } from '../../deps/aphrodite.js'
 import { connect } from '../../deps/react-redux.js'

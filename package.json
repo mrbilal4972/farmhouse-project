@@ -12,7 +12,10 @@
   "author": "",
   "license": "ISC",
   "description": "",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.20.0",
+    "emailjs-com": "^2.6.3"
+  },
   "devDependencies": {
     "prettier": "^2.0.5"
   }

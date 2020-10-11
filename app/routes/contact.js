@@ -10,7 +10,9 @@ import Page from '../components/layout/page.js'
 import input from '../styles/input.js'
 import buttons from '../styles/buttons.js'
 import Mail from '../lib/mail.js'
+// import emailjs from '../../deps/emailjs-com/source/index';
 import resolveAsset from '../utils/resolveAsset.js'
+import emailjs from 'emailjs-com';
 
 class Contact extends Component {
     constructor(props) {
@@ -79,7 +81,7 @@ class Contact extends Component {
         })
     }
 
-    sendMessage(e) {
+    sendMessage (e){
         e.preventDefault()
         e.stopPropagation()
         let { values } = this.state
@@ -91,9 +93,31 @@ class Contact extends Component {
                 let formatted = {}
                 Object.keys(values).forEach((key) => {
                     formatted[key] = values[key]['value']
+                    
                 })
-
-                Mail.send(formatted)
+                console.log(formatted);
+                // axios.post('https://docs.google.com/forms/d/e/1FAIpQLSf8FQ_TVk03ZOfeDOQVbM47ocG6qqm6-kcgfBsDqdKrhUmpzA/formResponse?',formatted)
+                // Mail.send(formatted)
+                try {
+                    emailjs.sendForm('gmail', 'template_fxoukxd', e.target, 'user_xpl5FovPRXbnPy7AgQs4v')
+                        .then((result) => {
+                            console.log(result.text);
+                        }, (error) => {
+                            console.log(error.text);
+                        });
+                    const response = fetch('https://v1.nocodeapi.com/mrbilal4972/google_sheets/IWmchccuIgnjNprA?tabId=Sheet1',{
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify([[formatted.name, formatted.email, new Date().toLocaleString()]])
+                    });
+                    response.json()
+                    setData({...data, name: '', email: ''})
+                    
+                } catch (error) {
+                    console.log(error)
+                }
             }
         )
     }
