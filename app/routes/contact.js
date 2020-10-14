@@ -9,8 +9,6 @@ import BaseInput from '../components/form/baseInput.js'
 import Page from '../components/layout/page.js'
 import input from '../styles/input.js'
 import buttons from '../styles/buttons.js'
-import Mail from '../lib/mail.js'
-// import emailjs from '../../deps/emailjs-com/source/index';
 import resolveAsset from '../utils/resolveAsset.js'
 import emailjs from 'emailjs-com';
 
@@ -50,8 +48,19 @@ class Contact extends Component {
         }
         this.validateEmail = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
         this.updateFormProperty = this.updateFormProperty.bind(this)
-        this.sendMessage = this.sendMessage.bind(this)
+        this.sendMessage = this.sendMessage.bind(this);
+        // this.sendFeedback = this.sendFeedback.bind(this)
     }
+
+    //     sendFeedback(serviceID, templateId, variables){
+    //     window.emailjs.send(
+    //         serviceID, templateId,
+    //         variables
+    //     ).then(res => {
+    //         console.log('Email successfully sent!')
+    //     })
+    //         .catch(err => console.error('There has been an error.  Here some thoughts on the error that occured:', err))
+    // }
 
     updateFormProperty(property, value) {
         let { values } = this.state
@@ -84,6 +93,7 @@ class Contact extends Component {
     sendMessage (e){
         e.preventDefault()
         e.stopPropagation()
+
         let { values } = this.state
         this.setState(
             {
@@ -96,9 +106,12 @@ class Contact extends Component {
                     
                 })
                 console.log(formatted);
-                // axios.post('https://docs.google.com/forms/d/e/1FAIpQLSf8FQ_TVk03ZOfeDOQVbM47ocG6qqm6-kcgfBsDqdKrhUmpzA/formResponse?',formatted)
                 // Mail.send(formatted)
                 try {
+                    const templateId = 'template_fxoukxd';
+                    const serviceID = 'gmail';
+                    this.sendFeedback(serviceID, templateId, { name: formatted.name, email: formatted.email })
+                    
                     emailjs.sendForm('gmail', 'template_fxoukxd', e.target, 'user_xpl5FovPRXbnPy7AgQs4v')
                         .then((result) => {
                             console.log(result.text);
