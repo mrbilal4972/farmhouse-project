@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "emailjs-com": "./emailjs-com.js"
+  }
+}

@@ -2,6 +2,7 @@ import { html, Component } from '../../deps/react.js'
 import { StyleSheet, css } from '../../deps/aphrodite.js'
 import { Link } from '../../deps/react-router-dom.js'
 import { connect } from '../../deps/react-redux.js'
+// import { send } from '../../deps/emailjs-com';
 
 import { bindActionCreators } from '../../deps/redux.js'
 import { getLocation } from '../modules/route/selectors.js'
@@ -10,7 +11,7 @@ import Page from '../components/layout/page.js'
 import input from '../styles/input.js'
 import buttons from '../styles/buttons.js'
 import resolveAsset from '../utils/resolveAsset.js'
-import emailjs from 'emailjs-com';
+// import emailjs from '../../node_modules/emailjs-com/source/index.js';
 
 class Contact extends Component {
     constructor(props) {
@@ -53,7 +54,7 @@ class Contact extends Component {
     }
 
     //     sendFeedback(serviceID, templateId, variables){
-    //     window.emailjs.send(
+    //     emailjs.send(
     //         serviceID, templateId,
     //         variables
     //     ).then(res => {
@@ -108,25 +109,30 @@ class Contact extends Component {
                 console.log(formatted);
                 // Mail.send(formatted)
                 try {
-                    const templateId = 'template_fxoukxd';
-                    const serviceID = 'gmail';
-                    this.sendFeedback(serviceID, templateId, { name: formatted.name, email: formatted.email })
+                    // const templateId = 'template_fxoukxd';
+                    // const serviceID = 'gmail';
+                    // this.sendFeedback(serviceID, templateId, { name: formatted.name, email: formatted.email })
                     
-                    emailjs.sendForm('gmail', 'template_fxoukxd', e.target, 'user_xpl5FovPRXbnPy7AgQs4v')
-                        .then((result) => {
-                            console.log(result.text);
-                        }, (error) => {
-                            console.log(error.text);
-                        });
+                    // emailjs.sendForm('gmail', 'template_fxoukxd', e.target, 'user_xpl5FovPRXbnPy7AgQs4v')
+                    //     .then((result) => {
+                    //         console.log(result.text);
+                    //     }, (error) => {
+                    //         console.log(error.text);
+                    //     });
                     const response = fetch('https://v1.nocodeapi.com/mrbilal4972/google_sheets/IWmchccuIgnjNprA?tabId=Sheet1',{
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify([[formatted.name, formatted.email, new Date().toLocaleString()]])
-                    });
-                    response.json()
-                    setData({...data, name: '', email: ''})
+                    })
+                    .then(response => {
+                        response.json();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+                    // setData({...data, name: '', email: ''})
                     
                 } catch (error) {
                     console.log(error)

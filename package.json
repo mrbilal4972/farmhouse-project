@@ -17,6 +17,7 @@
     "emailjs-com": "^2.6.3"
   },
   "devDependencies": {
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "snowpack": "^2.14.3"
   }
 }
